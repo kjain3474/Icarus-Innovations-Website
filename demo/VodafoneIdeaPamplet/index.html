@@ -1,0 +1,204 @@
+  <!doctype HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="style/style.css" />
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> 
+    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+	<script src="js_external/aframe-animation-component-5.1.2.min.js"></script>
+	<script src="js_external/aframe-extras-4.2.0.min.js"></script>
+	<script src="js_external/aframe-particle-system-component.js"></script>
+	<script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+    
+		<!-- import events.js script -->
+		<script src="events.js"></script>
+    </head>
+	    
+    <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+	
+	<div id ="scanPrompt">Scan Marker to view magic</div>
+	
+	<div id ="playVideo" class="hidden"><strong>Play Video</strong></div>
+	
+	<div id ="openBox" class="hidden" disabled><strong>Click on the box to open</strong></div>
+	
+	<video id="video" playsinline loop preload="auto" controls="true" src='VB.mp4' type='video/mp4' style="display:none"></video>
+	  
+        <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
+        <a-scene  embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+		
+		
+		<a-assets>
+			<a-mixin id="flap" animation="property: rotation; dir: alternate; loop: true"></a-mixin>
+			<a-mixin id="rotate" animation="property: rotation; loop: true"></a-mixin>
+			<a-mixin id="wing" geometry="primitive: box; depth: .005; height: 1; width: 0.5"
+                           material="color: #9D0B28" rotation="0 0 0"
+                           pivot="0.25 0 0" scale="1 1 1"></a-mixin>
+			<a-mixin id="cube" geometry="primitive: box"></a-mixin>		   
+						   
+			<audio id="flaps" src="audio/flap.wav" loop preload="auto"></audio>
+			
+			<a-asset-item id="giftbox" src="models/giftbox.gltf"></a-asset-item>
+			<a-asset-item id="grow" src="models/grow.glb"></a-asset-item>
+			<a-asset-item id="manage" src="models/manage.glb"></a-asset-item>
+			<a-asset-item id="engage" src="models/engage.glb"></a-asset-item>
+
+		</a-assets>
+  
+			<a-marker markerhandler1 emitevents="true" id="animated-marker1" type='barcode' value='1'>
+				<a-entity id="video" rotation="-90 0 0"></a-entity>
+			</a-marker>
+			
+			<a-marker camera markerhandler2 emitevents="true" id="animated-marker2" type='barcode' value='2'>
+			
+				<a-text id="cursortext" visible="false" position="0 0 1.5" rotation="-90 0 0" visible="true" value="Move the red circle on screen on the boxes to see Vodafone Solutions for your businness" position="0 21 0" side="double" align="center" transparent="false" width="5" height="5" color="white"></a-text>
+			
+				<!-- bird flaps -->
+				<a-entity id="bird" mixin="rotate" position="0 2 0" animation="to: 0 360 0; dur: 3000; easing: linear">
+					<a-entity rotation="0 90 0" position="1 0 -1">
+						<a-entity rotation="-180 0 90">
+							<a-entity mixin="wing flap" animation="to: 0 120 0"></a-entity>
+						</a-entity>
+						<a-entity rotation="-180 0 90">
+							<a-entity mixin="wing flag" animation="to: 0 -120 0"></a-entity>
+						</a-entity>
+					</a-entity>
+				<a-entity id="flapSrc" sound="src: #flaps"></a-entity>
+				</a-entity>
+				
+				<a-entity
+						visible="false"
+						id="gb1"
+						gltf-model="#giftbox"
+						position="-1.5 0 0"
+						rotation="0 0 0"
+						scale="0.1 0.1 0.1"
+				>
+					<a-text id="t1" visible="false" value="1" position="0 21 0" side="double" align="center" transparent="false" width="100" height="100" color="red"></a-text>
+				
+				</a-entity>
+				
+				<a-entity
+						visible="false"
+						id="main1"
+						gltf-model="#grow"
+						position="-1.5 0 0.5"
+						rotation="-90 0 0"
+						scale="2 2 1"
+				>
+					<a-entity position="0 0.3 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value: Mobile Workforce \n Essentials; width: 0.4;">
+					</a-entity>
+					
+					<a-entity position="0 0.35 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value: Office Applications; width: 0.4;">
+					</a-entity>
+					
+					<a-entity position="0 0.4 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value: Business Email; width: 0.4;">
+					</a-entity>
+					
+					<a-entity position="0 0.45 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value: Vodafone SuperNet 4G; width: 0.4;">
+					</a-entity> 
+				</a-entity>
+				
+				<a-entity
+						visible="false"
+						id="gb2"
+						gltf-model="#giftbox"
+						position="0 0 0"
+						rotation="0 0 0"
+						scale="0.1 0.1 0.1"
+				>
+					<a-text id="t2" visible="false" value="2" position="0 21 0" side="double" align="center" transparent="false" width="100" height="100" color="red"></a-text>
+				</a-entity>
+				
+				<a-entity
+						visible="false"
+						id="main2"
+						gltf-model="#manage"
+						position="0 0 0.5"
+						rotation="-90 0 0"
+						scale="2 2 1"
+				>		
+
+					<a-entity position="0 0.3 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value: Internet Presence; width: 0.4;">
+					</a-entity>
+					
+					<a-entity position="0 0.35 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value: Bulk SMS; width: 0.4;">
+					</a-entity>
+					
+					<a-entity position="0 0.4 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value: Vodafone Super Shield; width: 0.4;">
+					</a-entity>
+					
+					<a-entity position="0 0.45 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value: You Broadband ; width: 0.4;">
+					</a-entity>
+					
+				</a-entity>
+				
+				<a-entity
+						visible="false"
+						id="gb3"
+						gltf-model="#giftbox"
+						position="1.5 0 0"
+						rotation="0 0 0"
+						scale="0.1 0.1 0.1"
+				>
+					<a-text id="t3" visible="false" value="3" position="0 21 0" side="double" align="center" transparent="false" width="100" height="100" color="red"></a-text>
+				</a-entity>
+				
+				<a-entity
+						visible="false"
+						id="main3"
+						gltf-model="#engage"
+						position="1.5 0 0.5"
+						rotation="-90 0 0"
+						scale="2 2 1"
+				>		
+
+					<a-entity position="0 0.3 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value:Vodafone Location\nTracker; width: 0.4;">
+					</a-entity>
+					
+					<a-entity position="0 0.35 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value: Toll Free Service \n and UAN; width: 0.4;">
+					</a-entity>
+					
+					<a-entity position="0 0.4 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value: Vodafone SuperWifi; width: 0.4;">
+					</a-entity>
+					
+					<a-entity position="0 0.45 0" geometry="primitive: plane; width: 0.22; height: auto" material="color: #eee"
+						text="color: red; align: center; value: Vodafone Analytis; width: 0.4;">
+					</a-entity>
+					
+				</a-entity>
+	
+						
+			</a-marker camera>
+
+        <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
+			<a-entity camera>
+				<a-entity id="cursor" visible="false" position="0 0 -5"
+					geometry="primitive: ring; radiusOuter: 0.05;
+                          radiusInner: 0.02;"
+					material="color: red; shader: flat"
+					cursor="fuse: false">
+					<a-animation begin="click" easing="ease-in" attribute="scale"
+						fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+					<a-animation begin="fusing" easing="ease-in" attribute="scale"
+						fill="forwards" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
+				</a-entity>
+			</a-entity>
+			
+		
+        </a-scene>
+	
+    </body>
+</html>

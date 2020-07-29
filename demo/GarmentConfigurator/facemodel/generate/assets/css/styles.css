@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+	background: #fff;
+	font-family: karla, helvetica neue, helvetica, sans-serif;
+	font-weight: 400;
+	color: #353535;
+	font-size: 1.125rem;
+	font-style: normal;
+	line-height: 1.45;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-overflow-scrolling: touch;
+	height: 100%
+}
+
+h3{
+    font: normal 32px/1.5 'Open Sans', sans-serif;
+    color: #2c3e50;
+    margin: 20px 0;
+    text-align: center;
+}
+
+body{
+	font-family: karla, helvetica neue, helvetica, sans-serif
+}
+
+#facecut {
+ position: absolute; 
+ width: 100%; height: 100%;
+ top: 0px; left: 0px;
+ text-align: bottom;
+ display: block;
+} 
+
+#facecut img{
+ position: relative;          /* where the next element will be automatically positioned */
+ display: block;       /* causes element width to shrink to fit content */
+ left: 50%; 
+ top: 10%; /* moves left side of image/element to center of parent element */
+ transform: translate(-50%);
+  width: 70%;
+  height: 70%;
+  text-align:center
+ } 
+  
+.container{
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #efefef;
+	top:50%;
+	border-radius: 6px;
+}
+
+.app{
+    width: 100%;
+	height:auto;
+    position: relative;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	text-align: center;
+}
+
+.app #start-camera{
+    display: block;
+    border-radius: 3px;
+    max-width: 400px;
+    color: #fff;
+    background-color: #448AFF;
+    text-decoration: none;
+    padding: 15px;
+    opacity: 0.8;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.app video#camera-stream{
+    display: none;
+    width: 100%;
+}
+
+.app img#snap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    display: none;
+}
+
+.app #error-message{
+    width: 100%;
+    background-color: #ccc;
+    color: #9b9b9b;
+    font-size: 28px;
+    padding: 200px 100px;
+    text-align: center;
+    display: none;
+}
+
+.app .controls{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 30px;
+    display: none;
+}
+
+.app .controls a{
+    border-radius: 50%;
+    color: #fff;
+    background-color: #0d98ba;
+    text-decoration: none;
+    padding: 15px;
+    line-height: 0;
+    opacity: 0.7;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app .controls a:hover{
+    opacity: 1;
+}
+
+.app .controls a.disabled{
+    background-color: #555;
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+}
+
+.app .controls a.disabled:hover{
+    opacity: 0.5;
+}
+
+.app .controls a i{
+    font-size: 18px;
+}
+
+.app .controls #take-photo i{
+    font-size: 32px;
+}
+
+.app canvas{
+    display: none;
+}
+
+.hidden{
+	display: none !important;
+}
+
+.app video#camera-stream.visible,
+.app img#snap.visible,
+.app #error-message.visible
+{
+    display: block;
+}
+
+.app .controls.visible{
+    display: flex;
+}
+
+
+
+@media(max-width: 1000px){
+    .container{
+        margin: 40px;
+		margin-top: 2rem;
+    }
+
+    .app #start-camera.visible{
+        display: block;
+    }
+
+    .app .controls a i{
+        font-size: 16px;
+    }
+
+    .app .controls #take-photo i{
+        font-size: 24px;
+    }
+	
+	.percircle.big {
+    font-size:480px !important;
+}
+}
+
+
+@media(max-width: 600px){
+    .container{
+        margin: 10px;
+		margin-top: 7rem;
+    }
+
+    .app #error-message{
+        padding: 80px 50px;
+        font-size: 18px;
+    }
+
+    .app .controls a i{
+        font-size: 12px;
+    }
+
+    .app .controls #take-photo i{
+        font-size: 18px;
+    }
+	
+	.percircle.big {
+    font-size: 240px !important;
+}
+}
+
+
+
+/* loader bar */
+
+.queryloader__overlay__bar {
+	background: #979797!important;
+	height: 1px!important
+}
+
+#qLtempOverlay {
+	display: none!important
+}
+
+
+/* file upload */
+
+.file-input {
+  display: inline-block;
+  text-align: left;
+  background: #fff;
+  padding: 16px;
+  width: 100%;
+  position: relative;
+  border-radius: 3px;
+}
+
+.file-input > [type='file'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.file-input > .button {
+  display: inline-block;
+  cursor: pointer;
+  background: #eee;
+  padding: 8px 16px;
+  border-radius: 2px;
+  margin-right: 8px;
+}
+
+.file-input:hover > .button {
+  background: #0d98ba;
+  color: white;
+}
+
+.file-input > .label {
+  color: #333;
+  white-space: nowrap;
+  opacity: .3;
+}
+
+.file-input.-chosen > .label {
+  opacity: 1;
+}
+
+#pic{
+	position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+percircle {
+    position: relative;
+    font-size: 120px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    float: none !important;  
+    margin: 0 0 0 0 !important; 
+    background-color: #ccc;
+}
+
+.loadertext {
+	margin-top: 20px;
+    text-align: center;
+	font-size: 2rem;
+} 
+
+.percircle.big {
+    font-size: 360px !important;
+}

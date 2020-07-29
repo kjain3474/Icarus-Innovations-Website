@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Suit Viewer</title>
+
+	<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+	<script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+	<script src="main-nonobf.js"></script>
+
+	<link rel="stylesheet" href="style.css">
+	 
+	<meta name="apple-mobile-web-app-title" content="3D Catalogue">
+    <meta property="og:url" content="icarusinnovations.co/VCV/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Checkout the latest collection in 3D!!">
+    <meta property="og:description" content="Garment Viewer with material overlay in 3D">
+
+</head>
+
+<body oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;">
+
+	<div id="loader" style="text-align:center;">
+	<span style="color:#00904F"><strong>Please wait a little we are loading...</strong></span>
+	<br></br>
+	<svg viewBox="-2000 -1000 4000 2000">
+	<path id="inf" d="M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z"></path>
+	<use xlink:href="#inf" stroke-dasharray="1570 5143" stroke-dashoffset="6713px"></use>
+	</svg>
+	</div>
+
+
+	<div id="scrollWrapper" class="scrolling-wrapper hidden">
+	 <div class="dropdown" id="suit">
+        <div class="select">
+          <span>Suit</span>
+          <i class="fa fa-chevron-left"></i>
+        </div>
+        <input type="hidden" name="gender">
+        <ul class="dropdown-menu">
+          <!-- <li id="Black"><img src="suit/Black.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Blue"><img src="suit/Blue.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Grey"><img src="suit/Grey.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Dark Grey"><img src="suit/Dark Grey.jpg" style="width: 48px; height: 48px;"></li> -->
+		  <li id="Dark Grey"><img src="suit/White.jpg" style="width: 48px; height: 48px;"></li>
+		  <li id="Dark Grey"><img src="suit/Yellow.jpg" style="width: 48px; height: 48px;"></li>
+        </ul>
+      </div>
+
+       <div class="dropdown" id="shirts">
+        <div class="select">
+          <span>Shirt</span>
+          <i class="fa fa-chevron-left"></i>
+        </div>
+        <input type="hidden" name="gender">
+        <ul class="dropdown-menu">
+          <li id="Black"><img src="shirt/black.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Blue"><img src="shirt/blue.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="White"><img src="shirt/white.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Pink"><img src="shirt/pink.jpg" style="width: 48px; height: 48px;"></li>
+        </ul>
+      </div>
+
+      
+       <div class="dropdown" id="tie">
+        <div class="select">
+          <span>Tie</span>
+          <i class="fa fa-chevron-left"></i>
+        </div>
+        <input type="hidden" name="gender">
+        <ul class="dropdown-menu">
+          <li id="Crimson"><img src="tie/crimson.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Green"><img src="tie/green.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Orange"><img src="tie/orange.jpg" style="width: 48px; height: 48px;"></li>
+        </ul>
+      </div>
+
+       <div class="dropdown" id="shoes">
+        <div class="select">
+          <span>Shoes</span>
+          <i class="fa fa-chevron-left"></i>
+        </div>
+        <input type="hidden" name="gender">
+        <ul class="dropdown-menu">
+          <li id="Black"><img src="shoes/black.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Brown"><img src="shoes/brown.jpg" style="width: 48px; height: 48px;"></li>
+        </ul>
+      </div>
+     </div>
+
+  
+  <div id="aframe">
+		<a-scene loading-screen="enabled: false" gltf-model="dracoDecoderPath: gltf/;">
+
+      <a-assets>
+        <img id="sky" src="sky.jpg">
+		<a-asset-item id="shirt" src="suit/suits.obj"></a-asset-item>
+      </a-assets>
+
+	<a-entity
+		orbit-controls="target: 0 1 0; 
+		  enableDamping: true;
+          dampingFactor: 0.125;
+          rotateSpeed: 0.25;
+          minDistance: 1;
+          maxDistance: 3; 
+		  initialPosition: 0 5 10"
+        id="camera"
+        camera="
+		active: true;
+		fov: 90;
+		zoom: 1.2;"		
+      >
+		</a-entity>
+		
+
+			<a-entity id="target">
+				  <a-entity light="type:hemisphere;groundColor:#4a4137;color:#ceeaf7;angle:0;distance:100;decay:0;intensity:2;target:#statue" rotation="0 0 0.01" visible=""></a-entity>
+	 
+				 <a-light type="ambient" intensity="2"></a-light>
+				 
+				 
+				 <a-entity
+					light="type: directional;
+					intensity: 1;"
+					position="1 2 2.5">
+				</a-entity>
+				
+				 <a-entity
+					light="type: directional;
+					intensity: 1;"
+					position="1 2 -2.5">
+				</a-entity>
+				 
+				 <a-entity
+						id="cloth"
+						obj-model="obj: #shirt;"
+						position="0 -2.8 0"
+						rotation="0 0 0"
+						scale="0.03 0.03 0.03"
+				  ></a-entity>
+				 
+			</a-entity>
+
+			<a-sky src="#sky"></a-sky>
+
+		</a-scene>
+	</div>
+
+</body>
+
+
+
+</html>

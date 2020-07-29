@@ -1,0 +1,287 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 3144,
+      "max": [
+        5.0814609527587891,
+        0.50365298986434937,
+        1.0892863273620605
+      ],
+      "min": [
+        -5.0814609527587891,
+        -2.3699336051940918,
+        -15.016985893249512
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 37728,
+      "componentType": 5126,
+      "count": 3144,
+      "max": [
+        0.99993133544921875,
+        0.98234975337982178,
+        0.97387301921844482
+      ],
+      "min": [
+        -0.99993133544921875,
+        -0.99886703491210938,
+        -0.99959170818328857
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 3144,
+      "max": [
+        3143
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "wh_nerevar (https://sketchfab.com/wh_nerevar)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/models/fff834aae18d4f5081f9e6980fb40018",
+      "title": "Low Poly Male Base"
+    },
+    "generator": "Sketchfab-3.18.2",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 12576,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 75456,
+      "byteOffset": 12576,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 88032,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Material",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.59999999999999998
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Cube.001_Material_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0
+          },
+          "indices": 2,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "15effdee34d24b048a0cb8ceefe0fced.fbx"
+    },
+    {
+      "children": [
+        4,
+        6,
+        9
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        5
+      ],
+      "matrix": [
+        34.603847503662109,
+        0,
+        0,
+        0,
+        0,
+        -5.6376823448679603e-06,
+        -34.603847503661655,
+        0,
+        0,
+        34.603847503661655,
+        -5.6376823448679603e-06,
+        0,
+        0,
+        241.24252319335938,
+        -24.381013870239258,
+        1
+      ],
+      "name": "Cube.001"
+    },
+    {
+      "mesh": 0,
+      "name": "Cube.001_Material_0"
+    },
+    {
+      "children": [
+        7
+      ],
+      "matrix": [
+        94.966681916424207,
+        -5.518905780345583,
+        -30.83619634086498,
+        0,
+        22.875893361339152,
+        79.467238458321177,
+        56.228578504243941,
+        0,
+        21.401469775591845,
+        -60.452466073724523,
+        76.729892721478592,
+        0,
+        407.62454223632812,
+        590.38623046875,
+        1029.703125,
+        1
+      ],
+      "name": "Lamp"
+    },
+    {
+      "children": [
+        8
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.2204460492503131e-16,
+        1,
+        0,
+        0,
+        -1,
+        2.2204460492503131e-16,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": ""
+    },
+    {
+      "name": ""
+    },
+    {
+      "children": [
+        10
+      ],
+      "matrix": [
+        7.5497899598708784e-06,
+        -3.944304526105059e-29,
+        -99.999999999999716,
+        0,
+        1.8422972955528074e-13,
+        100,
+        1.3908957599850911e-20,
+        0,
+        99.999999999999716,
+        -1.8422972955528124e-13,
+        7.5497899598708784e-06,
+        0,
+        0,
+        0,
+        1233,
+        1
+      ],
+      "name": "Camera"
+    },
+    {
+      "name": ""
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
+

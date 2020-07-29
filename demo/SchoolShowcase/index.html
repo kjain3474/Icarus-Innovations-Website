@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="images/valji.png">
+	<title>Garment-O Retail Demo</title>
+	<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+	<script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+	<script src="viewer.js"></script>
+	<link rel="stylesheet" href="viewer.css">
+</head>
+
+<body>	
+
+<div class="wrapper" id="wrapper">
+	  
+		<div id="loader" style="text-align:center;">
+		<span style="color:#00904F"><strong>Please wait a little we are loading...</strong></span>
+		<br></br>
+		<svg viewBox="-2000 -1000 4000 2000">
+		<path id="inf" d="M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z"></path>
+		<use xlink:href="#inf" stroke-dasharray="1570 5143" stroke-dashoffset="6713px"></use>
+		</svg>
+		</div> 
+	  
+		<a-scene loading-screen="enabled: false" gltf-model="dracoDecoderPath:gltf/;">
+			  <a-assets>
+				<img id="sky" crossorigin="anonymous" src="sky.jpg">
+				<a-asset-item id="skirt" src="models/skirtDraco.glb"></a-asset-item>
+				<a-asset-item id="pinafore" src="models/pinaforeDraco.glb"></a-asset-item>
+				<a-asset-item id="halfshirt" src="models/halfshirtDraco.glb"></a-asset-item>
+			  </a-assets>
+
+			<a-entity
+				orbit-controls="target: 0 0 -5; 
+				  enableDamping: true;
+				  enablePan: true;
+				  dampingFactor: 0.125;
+				  rotateSpeed: 0.25;
+				  minDistance: 3;
+				  maxDistance: 8; 
+				  autoRotate:true;
+				  autoRotateSpeed: 0.2;
+				  autorotate: true;
+				  initialPosition: 0 3 10"
+				id="camera"
+				camera="
+				active: true;
+				fov: 70;
+				"				
+			  >
+			</a-entity>
+		
+
+			<a-entity id="target">
+				  <a-entity light="type:hemisphere;groundColor:#4a4137;color:#ceeaf7;angle:0;distance:100;decay:0;intensity:1.5;target:#statue" rotation="0 0 0.01" visible=""></a-entity>
+     
+                 <a-light type="ambient" intensity="1.5"></a-light>
+                 
+                 
+                 <a-entity
+                    light="type: directional;
+                    intensity: 1;"
+                    position="1 2 2.5">
+                </a-entity>
+                 
+                 <a-entity
+                    light="type: directional;
+                    intensity: 1;"
+                    position="1 2 -2.5">
+                </a-entity>
+				 
+				 
+				 <a-entity
+						id="cloth"
+						loaded-event
+						rotation="0 0 0"
+						scale="0.01 0.01 0.01"
+				  ></a-entity>
+
+				 
+			</a-entity>
+
+			<a-sky src="#sky"></a-sky>
+
+		</a-scene>
+
+
+      <div class="profile-card-ctr">
+        <button class="profile-card__button button--orange" onclick="fs(this)">FullScreen</button>
+      </div>
+	  
+	  <div class="profile-card-ctr-copyright">
+        <p><a href="https://www.icarusinnovations.co" target="_blank"><span><img crossorigin="anonymous" src="logo.png"></img></span></a></p>
+      </div>
+
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

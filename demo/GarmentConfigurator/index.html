@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>Garment Configurator</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<meta name="author" content="Icarus Innovation Labs Private Limited">
+<meta name="description" content="Icarus Innovations. Customize shirt to your need">
+<meta name="keywords" content="">
+
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="images/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="images/favicons/manifest.json">
+<link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#21252b">
+<meta name="theme-color" content="#ffffff">
+
+<meta property="og:title" content="Garment Configurator by Icarus Innovations &trade;">
+<meta property="og:url" content="https://www.icarusinnovations.com/GarmentConfigurator">
+<meta property="og:description" content="Web based Clothing Configurator with 3D face try on with just a single photo. Lets get going!">
+<meta property="og:image" content="images/icarus.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Scenia">
+<meta property="og:type" content="website">
+
+<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-reboot.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-grid.min.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="css/mediaquery.css" />
+
+<script src="js/libraries/jquery-3.2.1.min.js"></script>
+<script src="js/libraries/modernizr-custom.min.js"></script>
+<script src="js/libraries/velocity.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
+<script src="https://unpkg.com/three@0.87.1/examples/js/loaders/GLTFLoader.js"></script>
+<script src="js/ParticleEngine.js"></script>
+<script src="js/ParticleEngineExamples.js"></script>
+
+</head>
+<body>
+<main role="main">
+<section id="hero" class="hero">
+<div class="hero__object-shadow"><img src="3d/deer-shadow.png" alt=""></div>
+
+<a href="#" class="hero__trigger-button top">About</a>
+<a href="#" class="hero__trigger-button bottom">Start</a>
+<img class="logo" src="images/logo.png" alt="Scene Logo">
+
+<div class="meta name">
+<p><small>Icarus Innovations &trade;</small></p>
+</div>
+<div class="meta social">
+<ul>
+<li><a href="https://www.instagram.com/icarusinnovationlabs/" target="_blank"><span data-hover="instagram">instagram</span></a></li>
+<li><a href="https://www.facebook.com/icarusinnovations" target="_blank"><span data-hover="facebook">facebook</span></a></li>
+</ul>
+</div>
+<!-- <div class="meta sound">
+<a class="mute-action muted" href="#"></a>
+</div> -->
+</section>
+
+
+<section id="about" class="about idle">
+<div class="about__content">
+<div class="container">
+<div class="row">
+<div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 about__content__box first">
+<h5>We are Icarus Innovations &trade;</h5>
+<p>A tech based solutions provider with applications in the field of Real Estate, Agriculture, Inspection, Mining, Surveillance, Railways, Roadways, Marketing and much more. As the tagline goes, the company uses cutting edge technologies such as Drones, Artificial Intelligence, Machine Learning, Augmented & Virtual Reality, 3D Content to solve the problems of the world and innovate the future..</p>
+<ul class="social">
+<li><a href="https://www.instagram.com/icarusinnovationlabs/" target="_blank"><span data-hover="instagram">instagram</span></a></li>
+<li><a href="https://www.facebook.com/icarusinnovations" target="_blank"><span data-hover="facebook">facebook</span></a></li>
+<li><a href="https://www.linkedin.com/company/icarus-innovations-india" target="_blank"><span data-hover="linkedin">linkedin</span></a></li>
+</ul>
+</div>
+</div>
+<div class="row">
+<div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 about__content__box">
+<h5>About the product</h5>
+<ul class="services">
+<li>Web Garment Configurator is first of its kind 3D configurator which allows you to customise your shirts, suits, trousers and many more products online without the hassle of app or going to the store. What more, you can generate your own 3D face model from just a single photo to view along with your customised attire.</li>
+</ul>
+</div>
+</div>
+<!-- <div class="about__content__full-box">
+<div class="row">
+<div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+<h5>Clients</h5>
+<p>We’ve had the pleasure to work with companies such as Apple, Microsoft, Google, Github &amp; more.</p>
+<ul class="client-list">
+<li><img src="images/partners/partner-2.png" alt="Client"></li>
+<li><img src="images/partners/partner-1.png" alt="Client"></li>
+<li><img src="images/partners/partner-3.png" alt="Client"></li>
+<li><img src="images/partners/partner-4.png" alt="Client"></li>
+<li><img src="images/partners/partner-5.png" alt="Client"></li>
+<li><img src="images/partners/partner-6.png" alt="Client"></li>
+</ul>
+</div>
+</div>
+</div> -->
+<div class="row">
+<div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 about__content__box last">
+<h5>Want to be on that list?</h5>
+<p>Send us an e-mail over at <a href="mailto:sales@icarusinnovations.co">sales@icarusinnovations.co</a></p>
+</div>
+</div>
+</div>
+
+<img class="logo" src="images/logo.png" alt="Scene Logo">
+<div class="meta name">
+<p><small>Icarus Innovations &trade;</small></p>
+</div>
+<div class="meta social">
+<ul>
+<li><a href="https://www.instagram.com/icarusinnovationlabs/" target="_blank"><span data-hover="instagram">instagram</span></a></li>
+<li><a href="https://www.facebook.com/icarusinnovations" target="_blank"><span data-hover="facebook">facebook</span></a></li>
+</ul>
+</div>
+<!-- <div class="meta sound">
+<a class="mute-action" href="#"></a>
+</div> -->
+<a href="#" class="close-button top">Close</a>
+</div>
+
+
+</section>
+<section id="work" class="work idle">
+<div class="work__content">
+<div class="container">
+<div class="row initial-position">
+<div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 work__content__box first">
+<h5>Choose one option</h5>
+<p>Either create a face model to view on your outfit or directly move on to your customisation with the configurator.</p>
+<!-- <ul class="filters">
+<li data-filter="*" class="is-checked"><span data-hover="all">all</span></li>
+<li data-filter=".branding"><span data-hover="branding">branding</span></li>
+<li data-filter=".web-design"><span data-hover="web design">web design</span></li>
+<li data-filter=".print"><span data-hover="print">print</span></li>
+<li data-filter=".video"><span data-hover="video">video</span></li>
+</ul> -->
+</div>
+</div>
+
+<div class="ajax-section clearfix">
+<div class="ajax-section__loader"></div>
+<div class="ajax-section__project-navigation">
+</div>
+<!-- <div class="ajax-section__project-close">
+<a href="#">close</a>
+</div> -->
+<div class="ajax-section__content"></div>
+</div>
+
+<div class="row work__content__thumbnails">
+<div class="col-12 col-md-6 project show video">
+ <a id="face" class="thumbnail">
+<div class="overlay">
+<div class="project-info"><p>Face Model<br><span>A single photo will create your 3D head model.</span></p></div>
+</div>
+<img src="images/options/face.jpg" class="img" alt="thumbnail"></img>
+</a>
+</div>
+<div class="col-12 col-md-6 project show branding">
+<a id="config" class="thumbnail">
+<div class="overlay">
+<div class="project-info"><p>Configurator<br><span>Lets start customising your outfit</span></p></div>
+</div>
+<img src="images/options/shirt.jpg" class="img" alt="thumbnail"></img>
+</a>
+</div>
+</div>
+<div class="row">
+<div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 work__content__box last">
+<h5>Want to work with us?</h5>
+<p>Send us an e-mail over at <a href="mailto:sales@icarusinnovations.co">sales@icarusinnovations.co</a></p>
+</div>
+</div>
+</div>
+
+<img class="logo" src="images/logo.png" alt="Scene Logo">
+<div class="meta name">
+<p><small>Icarus Innovations &trade;</small></p>
+</div>
+<div class="meta social">
+<ul>
+<li><a href="https://www.instagram.com/icarusinnovationlabs/" target="_blank"><span data-hover="instagram">instagram</span></a></li>
+<li><a href="https://www.facebook.com/icarusinnovations" target="_blank"><span data-hover="facebook">facebook</span></a></li>
+</ul>
+</div>
+<!-- <div class="meta sound">
+<a class="mute-action" href="#"></a>
+</div> -->
+<a href="#" class="close-button bottom">Close</a>
+</div>
+</section>
+</main>
+
+<div class="grain"></div>
+
+<script src="js/plugins/retina.min.js" type="text/javascript"></script>
+<script src="js/plugins/ion.sound.min.js" type="text/javascript"></script>
+<script src="js/plugins/imagesloaded.min.js" type="text/javascript"></script>
+<script src="js/plugins/jquery.fitvids.js" type="text/javascript"></script>
+<script src="js/plugins/jquery-ui.min.js" type="text/javascript"></script>
+<script src="js/plugins/jquery.event.move.js" type="text/javascript"></script>
+<script src="js/plugins/jquery.event.swipe.js" type="text/javascript"></script>
+<script src="js/plugins/unslider.js" type="text/javascript"></script>
+<script src="js/3d/projector.js" type="text/javascript"></script>
+<script src="js/3d/canvasrenderer.js" type="text/javascript"></script>
+<script src="js/3d/object-loader.js" type="text/javascript"></script>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/plugins/queryloader.min.js" type="text/javascript"></script>
+
+<script src="js/main.js" type="text/javascript"></script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="en-EN" />
+        
+        <title>Jewellery Try-On Icarus Innovations</title>
+        
+        <!-- INCLUDE JEELIZ FACEFILTER SCRIPT -->
+        <script type="text/javascript" src="dist/jeelizFaceFilter.js"></script>
+
+        <!-- INCLUDE THREE.JS -->
+        <script type="text/javascript" src="libs/threejs/v97/three.js"></script>
+        <script type="text/javascript" src="libs/threejs/v97/GLTFLoader.js"></script>
+        
+        <!-- INCLUDE DEMO SCRIPT -->
+        <script type="text/javascript" src="demo_gltf.js"></script>
+
+        <link rel="stylesheet" href="appearance/styleFullScreen.css" type="text/css" />
+    </head>
+    
+    <body onload="main()" style='color: white'>
+	
+	
+		<div id="facecut">
+		
+			<img src="image/guide.svg" alt="Face cut out">
+				<div class="textguide">Use the guide to position your face</div>
+			</img>
+					
+		</div>
+		
+        <canvas width="600" height="600" id='jeeFaceFilterCanvas'></canvas>
+		
+
+        <div id="screenshot" style="z-index:100000000005">
+            <button class="screenshot">Take ScreenShot</button>
+        </div>
+            
+        <div id="change" style="z-index:10000000005">
+            <button class="change">Change Earrings</button>
+        </div>
+            
+
+	 <script type="text/javascript" src="all.js"></script>
+    </body>
+</html>
+ 
+ 

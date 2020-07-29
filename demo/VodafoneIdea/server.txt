@@ -1,0 +1,1 @@
+serve\bin\serve.bat -d serve\jini -p 7777 -i WiFi

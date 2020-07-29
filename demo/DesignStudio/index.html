@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Design Studio Online</title>
+
+	<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+	<script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<script src="mainobf.js"></script>
+
+	<link rel="stylesheet" href="style.css">
+	
+	<!-- Favicons -->
+    <link rel="shortcut icon"href="images/favicon.png">
+	
+
+</head>
+
+<body oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;">
+
+	<div id="loader" style="text-align:center;">
+	<span style="color:#00904F"><strong>Please wait a little we are loading...</strong></span>
+	<br></br>
+	<svg viewBox="-2000 -1000 4000 2000">
+	<path id="inf" d="M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z"></path>
+	<use xlink:href="#inf" stroke-dasharray="1570 5143" stroke-dashoffset="6713px"></use>
+	</svg>
+	</div>
+
+
+	<div id="scrollWrapper" class="scrolling-wrapper hidden">
+	 <div class="dropdown" id="suit">
+        <div class="select">
+          <span>Front</span>
+          <i class="fa fa-chevron-left"></i>
+        </div>
+        <input type="hidden" name="gender">
+        <ul class="dropdown-menu">
+          <li id="Black"><img src="5.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Blue"><img src="6.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Grey"><img src="7.jpg" style="width: 48px; height: 48px;"></li>
+        </ul>
+      </div>
+
+       <div class="dropdown" id="shirts">
+        <div class="select">
+          <span>Back</span>
+          <i class="fa fa-chevron-left"></i>
+        </div>
+        <input type="hidden" name="gender">
+        <ul class="dropdown-menu">
+          <li id="Black"><img src="1.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Blue"><img src="2.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Pink"><img src="4.jpg" style="width: 48px; height: 48px;"></li>
+        </ul>
+      </div>
+
+      
+       <div class="dropdown" id="tie">
+        <div class="select">
+          <span>CounterTop</span>
+          <i class="fa fa-chevron-left"></i>
+        </div>
+        <input type="hidden" name="gender">
+        <ul class="dropdown-menu">
+          <li id="Crimson"><img src="8.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Green"><img src="9.jpg" style="width: 48px; height: 48px;"></li>
+          <li id="Orange"><img src="10.jpg" style="width: 48px; height: 48px;"></li>
+        </ul>
+      </div>
+
+     </div>
+
+  
+  <div id="aframe">
+		<a-scene loading-screen="enabled: false" gltf-model="dracoDecoderPath: gltf/;">
+
+      <a-assets>
+		<a-asset-item id="cabinet" src="cabinet.glb"></a-asset-item>
+      </a-assets>
+
+	<a-entity
+		orbit-controls="target: 0 1 0; 
+		  enableDamping: true;
+          dampingFactor: 0.125;
+          rotateSpeed: 0.25;
+          minDistance: 1;
+          maxDistance: 10; 
+		  initialPosition: 0 5 10"
+        id="camera"
+        camera="
+		active: true;
+		fov: 60;
+		zoom: 1.2;"		
+      >
+		</a-entity>
+		
+
+			<a-entity id="target">
+	 
+				 <a-light type="ambient" intensity="2"></a-light>
+				 
+				 
+				 <a-entity
+					light="type: directional;
+					intensity: 1;"
+					position="1 2 2.5">
+				</a-entity>
+				 
+				 <a-entity
+						id="cloth"
+						gltf-model="#cabinet"
+						position="0 -2.8 0"
+						rotation="0 0 0"
+						scale="0.3 0.3 0.3"
+				  ></a-entity>
+				 
+			</a-entity>
+
+		</a-scene>
+	</div>
+
+</body>
+
+
+
+</html>

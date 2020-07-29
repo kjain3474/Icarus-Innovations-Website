@@ -1,0 +1,39 @@
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  border: 0;
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  /* transition: background-color .05s ease; */
+  -webkit-transition: background-color .05s ease;
+  z-index: 9999;
+}
+  
+.card {
+   display: inline-block;
+}
+
+.card {
+  border: 1px solid white;
+  width: 100px;
+  height: 100px;
+  color: white;
+  background: black;
+  text-align:center;
+}
+
+.card img{
+  pointer-events: auto;
+  cursor: pointer;
+  width: 100%;		
+}
+
+.scrolling-wrapper {
+  height: 75px;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
+}

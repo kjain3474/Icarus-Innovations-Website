@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+<meta name="generator" content="Hugo 0.48" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>360 Tour</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/bootstrap-native.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600%7CSource+Code+Pro:400,600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/pygments.css">
+<link rel="stylesheet" href="css/viewer.css" />
+<script type="text/javascript" src="js/libpannellum.js"></script>
+<script type="text/javascript" src="js/viewer.js"></script>
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<div id="panorama" style="width:100%;height:100%"></div>
+<script>
+
+
+pannellum.viewer('panorama', {   
+    "default": {
+        "firstScene": "library",
+        "sceneFadeDuration": 1000,
+        "autoLoad": true
+    },
+    
+    "scenes": {
+        "library": {
+            "title": "Library",
+            "hfov": 100,
+            "pitch": 10,
+            "yaw": 50,
+            "compass": true,
+            "northOffset": 289,
+            "type": "multires",
+            "multiRes": {
+                "basePath": "https:\/\/pannellum.org/images/multires/library",
+                "path": "/%l/%s%y_%x",
+                "fallbackPath": "/fallback/%s",
+                "extension": "jpg",
+                "tileResolution": 512,
+                "maxLevel": 6,
+                "cubeResolution": 8432
+            },
+            "hotSpots": [
+                {
+                    "pitch": 60,
+                    "yaw": 60,
+                    "type": "info",
+                    "text": "The skylight is supported by an iron truss and has a second, peaked skylight over it."
+                },
+                {
+                    "pitch": 10,
+                    "yaw": 25,
+                    "type": "info",
+                    "text": "Much of the library was constructed from cast-iron to reduce the risk of fire."
+                },
+                {
+                    "pitch": 0,
+                    "yaw": 8,
+                    "type": "info",
+                    "text": "The lighting was originally gas."
+                },
+                {
+                    "pitch": -3,
+                    "yaw": 115,
+                    "type": "info",
+                    "text": "The JHU library catalog contains the Peabody Library’s holdings.",
+                    "URL": "https://icarusinnovations.co"
+                },
+                {
+                    "pitch": -3,
+                    "yaw": 65,
+                    "type": "scene",
+                    "text": "Gallery",
+                    "sceneId": "gallery"
+                },
+                {
+                    "pitch": 47,
+                    "yaw": -135,
+                    "type": "scene",
+                    "text": "6th Floor",
+                    "sceneId": "6th-floor"
+                }
+            ]
+        },
+
+        "gallery": {
+            "title": "Gallery",
+            "hfov": 100,
+            "yaw": -20,
+            "type": "multires",
+            "compass": true,
+            "northOffset": 240,
+            "multiRes": {
+                "basePath": "https:\/\/pannellum.org/images/multires/gallery",
+                "path": "/%l/%s%y_%x",
+                "fallbackPath": "/fallback/%s",
+                "extension": "jpg",
+                "tileResolution": 512,
+                "maxLevel": 5,
+                "cubeResolution": 4384
+            },
+            "hotSpots": [
+                {
+                    "pitch": -7,
+                    "yaw": -58,
+                    "type": "scene",
+                    "text": "Library",
+                    "sceneId": "library",
+                    "targetYaw": 240
+                }
+            ]
+        },
+        
+        "6th-floor": {
+            "title": "6th Floor",
+            "hfov": 100,
+            "pitch": -20,
+            "yaw": -20,
+            "compass": true,
+            "northOffset": 0,
+            "type": "multires",
+            "multiRes": {
+                "basePath": "https:\/\/pannellum.org/images/multires/6th-floor",
+                "path": "/%l/%s%y_%x",
+                "fallbackPath": "/fallback/%s",
+                "extension": "jpg",
+                "tileResolution": 512,
+                "maxLevel": 4,
+                "cubeResolution": 3968
+            },
+            "hotSpots": [
+                {
+                    "pitch": -47.5,
+                    "yaw": -11,
+                    "type": "scene",
+                    "text": "Main Floor",
+                    "sceneId": "library"
+                },
+                {
+                    "pitch": -28,
+                    "yaw": -3,
+                    "type": "scene",
+                    "text": "Gallery",
+                    "sceneId": "gallery"
+                },
+                {
+                    "pitch": -20,
+                    "yaw": -165.7,
+                    "type": "info",
+                    "text": "The A B C of Prohibition",
+                    "URL": "https://icarusinnovations.co"
+                }
+            ]
+        }
+    }
+});
+
+
+/*!
+devtools-detect
+Detect if DevTools is open
+https://github.com/sindresorhus/devtools-detect
+By Sindre Sorhus
+MIT License
+*/
+(function () {
+	'use strict';
+	
+	const devtools = {
+		isOpen: false,
+		orientation: undefined
+	};
+
+	const threshold = 160;
+
+	const emitEvent = (isOpen, orientation) => {
+		window.dispatchEvent(new CustomEvent('devtoolschange', {
+			detail: {
+				isOpen,
+				orientation
+			}
+		}));
+	};
+
+	setInterval(() => {
+		const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+		const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+		const orientation = widthThreshold ? 'vertical' : 'horizontal';
+
+		if (
+			!(heightThreshold && widthThreshold) &&
+			((window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) || widthThreshold || heightThreshold)
+		) {
+			if (!devtools.isOpen || devtools.orientation !== orientation) {
+				emitEvent(true, orientation);
+			}
+
+			devtools.isOpen = true;
+			devtools.orientation = orientation;
+		} else {
+			if (devtools.isOpen) {
+				emitEvent(false, undefined);
+			}
+
+			devtools.isOpen = false;
+			devtools.orientation = undefined;
+		}
+	}, 500);
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = devtools;
+	} else {
+		window.devtools = devtools;
+	}
+	})();
+
+		// Check if it's open
+		if(window.devtools.isOpen){
+			console.clear();
+			window.close();
+		}
+
+		// Get notified when it's opened/closed or orientation changes
+		window.addEventListener('devtoolschange', event => {
+			 if(event.detail.isOpen){
+				console.clear();
+				clearHTML();
+			 }
+		});
+		
+	//f12
+	$(document).keydown(function(e){
+			if(e.which === 123){
+ 
+			return false;
+	
+		}
+ 
+		});
+	
+	//right click
+	$(document).bind("contextmenu",function(e) { 
+	e.preventDefault();
+ 
+	});
+	
+	function clearHTML(){
+		 document.body.innerHTML = '';
+		 document.head.innerHTML = '';
+	}
+</script>
+</body>
+
+</html>

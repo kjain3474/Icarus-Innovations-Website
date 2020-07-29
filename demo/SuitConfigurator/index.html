@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="favicon.png">
+<title>Icarus Suit Configurator</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/configurator/bootstrap.css" rel="stylesheet">
+<link href="css/configurator/ionicons.min.css" rel="stylesheet">
+
+<!-- Offline.js -->
+<link rel="stylesheet" href="css/configurator/offline-theme-chrome-indicator.css">
+<link rel="stylesheet" href="css/configurator/offline-language-english-indicator.css">
+<script src="js/offline.js"></script>
+
+
+<!-- Custom styles for this template -->
+<link href="css/configurator/style.css" rel="stylesheet">
+<link href="css/configurator/responsive.css" rel="stylesheet">
+
+<!-- model multiselect -->
+<!-- MultiSelect CSS & JS library -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="css/configurator/jquery.multiselect.css" rel="stylesheet" />
+<script src="js/jquery.multiselect.js"></script>
+
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<!--loader -->
+<div class="preloader-wrapper" id="loader" style="display:none">
+	<div class="preloader-content">
+		<div class="img-wrapper">
+			<img src="img/configurator/outer.png" class="outer upscaled-to-large">
+			<!--<img src="img/configurator/inner.png" class="inner upscaled-to-large">-->
+		</div>
+	</div>
+</div>
+
+<!-- logo -->
+<div class="header-main">
+	<div class="logo-left">
+    	<a href="" target="_blank">
+    		<img src="img/configurator/logo.png" >
+        </a>
+    </div>
+
+    <!-- tabs -->
+    <ul class="list-inline top-center-menu" id="tabs" data-tabs="tabs">
+      
+      <li class="active">
+      		<a href="#fabric_tab" data-toggle="tab">
+            	<img src="img/configurator/fabric.png" >
+                Fabrics
+          </a>
+      </li>
+      <li>
+      		<a href="#style_tab" data-toggle="tab">
+            	<img src="img/configurator/tape.png" >
+                Sizing
+            </a>
+      </li>
+      <li>
+      		<a id="orderTab" href="#order_tab" data-toggle="tab">
+            	<img src="img/configurator/order.png">
+                Order
+            </a>
+      </li>
+    </ul>
+</div>
+
+<!-- main content of canvas-->
+  <div  id="main_window">
+
+      <div class="center-block text-center" id="image_block">
+  	  <div id="aframe" >
+        <a-scene loading-screen="enabled: false" renderer="antialias: true;
+                   colorManagement: false;
+                   sortObjects: true;
+                   physicallyCorrectLights: true;
+                   maxCanvasWidth: 1920;
+                   maxCanvasHeight: 1920;
+           logarithmicDepthBuffer: true" gltf-model="dracoDecoderPath: gltf/;">
+
+      <a-assets>
+        <img id="sky" src="sky.jpg">
+        <a-asset-item id="shirtpantmodel" src="models/shirtpant.glb"></a-asset-item>
+        <a-asset-item id="jacketmodel" src="models/1bj.glb"></a-asset-item>
+        <a-asset-item id="lapelmodel" src="models/notchsb.glb"></a-asset-item>
+        <a-asset-item id="pocketmodel" src="models/str8pcktwtsb.glb"></a-asset-item>
+        <a-asset-item id="ventmodel" src="models/svj.glb"></a-asset-item>
+        <a-asset-item id="tiemodel" src="models/tie.glb"></a-asset-item>
+        <a-asset-item id="shoesmodel" src="models/shoes.glb"></a-asset-item>
+        <a-asset-item id="facemodel" src="models/face.glb"></a-asset-item>
+        <a-asset-item id="handsmodel" src="models/hands.glb"></a-asset-item>
+      </a-assets>
+
+    <a-entity
+        orbit-controls="target: 0 1 0; 
+          enableDamping: true;
+          dampingFactor: 0.125;
+          rotateSpeed: 0.25;
+          minDistance: 1;
+          maxDistance: 4; 
+          initialPosition: 0 5 10"
+        id="camera"
+        camera="
+        active: true;
+        fov: 75;
+        zoom: 1;"     
+      >
+        </a-entity>
+        
+
+            <a-entity id="target" texturechange>
+                  <a-entity light="type:hemisphere;groundColor:#4a4137;color:#ceeaf7;angle:0;distance:100;decay:0;intensity:2;target:#statue" rotation="0 0 0.01" visible=""></a-entity>
+     
+                 <a-light type="ambient" intensity="1.5"></a-light>
+                 
+                 
+                 <a-entity
+                    light="type: directional;
+                    intensity: 1;"
+                    position="1 2 2.5">
+                </a-entity>
+                 
+                 <a-entity
+                    light="type: directional;
+                    intensity: 1;"
+                    position="1 2 -2.5">
+                </a-entity>
+
+                <a-entity
+                        modify-materials
+                        id="shirtpantEntity"
+                        gltf-model="#shirtpantmodel"
+                        position="0 -2.5 0"
+                        rotation="0 0 0"
+                        scale="0.003 0.003 0.003"
+                ></a-entity> 
+
+                <a-entity
+                        modify-materials
+                        id="tieEntity"
+                        gltf-model="#tiemodel"
+                        position="0 -2.5 0"
+                        rotation="0 0 0"
+                        scale="0.003 0.003 0.003"
+                ></a-entity> 
+
+                <a-entity
+                        modify-materials
+                        id="jacketEntity"
+                        gltf-model="#jacketmodel"
+                        position="0 -2.5 0"
+                        rotation="0 0 0"
+                        scale="0.003 0.003 0.003"
+                ></a-entity>
+
+                <a-entity
+                        modify-materials
+                        id="lapelEntity"
+                        gltf-model="#lapelmodel"
+                        position="0 -2.5 0"
+                        rotation="0 0 0"
+                        scale="0.003 0.003 0.003"
+                ></a-entity>
+
+                <a-entity
+                        modify-materials
+                        id="pocketEntity"
+                        gltf-model="#pocketmodel"
+                        position="0 -2.5 0"
+                        rotation="0 0 0"
+                        scale="0.003 0.003 0.003"
+                ></a-entity>
+
+
+                <a-entity
+                        modify-materials
+                        id="ventEntity"
+                        gltf-model="#ventmodel"
+                        position="0 -2.5 0"
+                        rotation="0 0 0"
+                        scale="0.003 0.003 0.003"
+                ></a-entity>
+
+                <a-entity
+                        modify-materials
+                        id="faceEntity"
+                        gltf-model="#facemodel"
+                        position="0 -2.5 0"
+                        rotation="0 0 0"
+                        scale="3 3 3"
+                ></a-entity>
+
+                <a-entity
+                        modify-materials
+                        id="handsEntity"
+                        gltf-model="#handsmodel"
+                        position="0 -2.5 0"
+                        rotation="0 0 0"
+                        scale="3 3 3"
+                ></a-entity>
+
+                <a-entity
+                        modify-materials
+                        id="shoesEntity"
+                        gltf-model="#shoesmodel"
+                        position="0 -2.5 0"
+                        rotation="0 0 0"
+                        scale="3 3 3"
+                ></a-entity>
+
+
+            </a-entity>
+
+            <a-sky src="#sky"></a-sky>
+
+        </a-scene>
+      </div>
+  	 </div>
+  </div>
+
+
+  <div class="profile-card-ctr-copyright">
+        <p>Powered by<a href="https://www.icarusinnovations.co" target="_blank"><span><img crossorigin="anonymous" src="img/configurator/icaruslogo.png"></img></span></a></p>
+  </div>
+
+    <!-- Modal Suit-->
+<!--     <div class="modal fade" id="suitModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Filter Suit Fabric List</h4>
+          </div>
+          <div class="modal-body">
+
+             <form id="suitFilterForm">
+               <div class="row">
+			   
+					<div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Book:</label>
+                        <select multiple id="suitbook" name="Book" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+					
+					<div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Pattern:</label>
+                        <select multiple id="suitpattern" name="Pattern" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                            
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Brand:</label>
+                        <select multiple id="suitbrand" name="Brand" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Color:</label>
+                        <select multiple id="suitcolor" name="Color" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Pattern:</label>
+                        <select multiple id="suitpattern" name="Pattern" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Material:</label>
+                        <select multiple id="suitmaterial" name="Material" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+
+                </div>
+              </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="filterSuitData">Apply</button>
+          </div>
+        </div>
+        
+      </div>
+    </div> -->
+
+
+    <!-- Modal Jacket-->
+    <div class="modal fade" id="jacketModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Filter Jacket Fabric List</h4>
+          </div>
+          <div class="modal-body">
+
+             <form id="jacketFilterForm">
+               <div class="row">
+
+                   <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Book:</label>
+                        <select multiple id="jacketbook" name="Book" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Pattern:</label>
+                        <select multiple id="jacketpattern" name="Pattern" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                            
+                    <!-- <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Brand:</label>
+                        <select multiple id="jacketbrand" name="Brand" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Color:</label>
+                        <select multiple id="jacketcolor" name="Color" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Pattern:</label>
+                        <select multiple id="jacketpattern" name="Pattern" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Material:</label>
+                        <select multiple id="jacketmaterial" name="Material" class="form-control">
+                          </select>
+                      </div>
+                    </div> -->
+
+                </div><!--/ Row-->
+              </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="filterJacketData">Apply</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+<!-- Modal Trouser-->
+    <div class="modal fade" id="trouserModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Filter Trouser Fabric List</h4>
+          </div>
+          <div class="modal-body">
+
+             <form id="trouserFilterForm">
+               <div class="row">
+
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Book:</label>
+                        <select multiple id="trouserbook" name="Book" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Pattern:</label>
+                        <select multiple id="trouserpattern" name="Pattern" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+
+                            
+                    <!-- <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Brand:</label>
+                        <select multiple id="trouserbrand" name="Brand" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Color:</label>
+                        <select multiple id="trousercolor" name="Color" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Pattern:</label>
+                        <select multiple id="trouserpattern" name="Pattern" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Material:</label>
+                        <select multiple id="trousermaterial" name="Material" class="form-control">
+                          </select>
+                      </div>
+                    </div> -->
+
+                </div><!--/ Row-->
+              </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="filterTrouserData">Apply</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Modal Shirt-->
+    <div class="modal fade" id="shirtModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Filter Shirt Fabric List</h4>
+          </div>
+          <div class="modal-body">
+
+             <form id="shirtFilterForm">
+               <div class="row">
+			   
+					         <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Book:</label>
+                        <select multiple id="shirtbook" name="Book" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Pattern:</label>
+                        <select multiple id="shirtpattern" name="Pattern" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                            
+                    <!-- <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Brand:</label>
+                        <select multiple id="shirtbrand" name="Brand" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Color:</label>
+                        <select multiple id="shirtcolor" name="Color" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Pattern:</label>
+                        <select multiple id="shirtpattern" name="Pattern" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Material:</label>
+                        <select multiple id="shirtmaterial" name="Material" class="form-control">
+                          </select>
+                      </div>
+                    </div> -->
+
+                </div><!--/ Row-->
+              </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="filterShirtData">Apply</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+
+
+    <!-- Modal Jacket-->
+    <div class="modal fade" id="jacketModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Filter Jacket Fabric List</h4>
+          </div>
+          <div class="modal-body">
+
+             <form id="jacketFilterForm">
+               <div class="row">
+			   
+					<div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Book:</label>
+                        <select multiple id="jacketbook" name="Book" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Pattern:</label>
+                        <select multiple id="jacketpattern" name="Pattern" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                            
+                    <!-- <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Brand:</label>
+                        <select multiple id="jacketbrand" name="Brand" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Color:</label>
+                        <select multiple id="jacketcolor" name="Color" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Pattern:</label>
+                        <select multiple id="jacketpattern" name="Pattern" class="form-control">
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
+                      <div class="form-group">
+                        <label class="select">Select Material:</label>
+                        <select multiple id="jacketmaterial" name="Material" class="form-control">
+                          </select>
+                      </div>
+                    </div> -->
+
+                </div><!--/ Row-->
+              </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="filterJacketData">Apply</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+
+    <!-- Modal Send PDF-->
+    <div class="modal fade" id="pdfModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Enter Client details</h4>
+          </div>
+          <div class="modal-body">
+
+             <form id="pdfForm" class="pdfForm">
+               <div class="row">
+
+                  <div class="col-lg-6 col-xs-12 col-sm-6">
+                    <div class="form-group">
+                      <label>Client Name</label>
+                      <input type="text" class="form-control" name="Name" placeholder="Name" required="true">
+                    </div>
+                  </div>
+                  
+                  <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                    <div class="form-group">
+                      <label>Client Email</label>
+                      <input type="email" class="form-control" name="Email" placeholder="Email Id" required="true">
+                    </div>
+                  </div>
+
+                </div><!--/ Row-->
+
+
+                  <div class="row">
+
+                  <div class="col-lg-6 col-xs-12 col-sm-6">
+                    <div class="form-group">
+                      <label>Client Phone</label>
+                      <input type="tel" class="form-control" name="Telephone" placeholder="Telephone Number (Optional)">
+                    </div>
+                  </div>
+                
+
+                </div><!--/ Row-->
+
+
+              </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" id="sendPdf">Send to mail</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+  <!-- left tab contents -->
+  <div class="tab-content">
+    
+
+    <!-- fabric selection tab -->
+    <div class="sidebar tab-pane active" id="fabric_tab">
+            <div class="sidebar-menu leftside">
+
+                <ul id="fabric_rightside" class="content">
+                    
+                    <li> <a href="javascript:void(0)" class="sidebar-toggle styling-menu" data-id="styling-menu"> <img src="img/configurator/suit.png" class="img-responsive"> <span>Styling</span></a> </li>
+                     <li> <a href="javascript:void(0)" class="sidebar-toggle jacket-menu" data-id="jacket-menu"> <img src="img/configurator/jacket.png" class="img-responsive"> <span>Jacket</span></a> </li>
+                    <li> <a href="javascript:void(0)" class="sidebar-toggle trouser-menu" data-id="trouser-menu"> <img src="img/configurator/trouser.png" class="img-responsive"> <span>Trousers</span></a> </li>
+                    <li> <a href="javascript:void(0)" class="sidebar-toggle favourite-menu" data-id="favourite-menu"> <img src="img/configurator/shirt.png" class="img-responsive"> <span>Shirt</span></a> </li>
+                    <li> <a href="javascript:void(0)" class="sidebar-toggle tie-menu" data-id="tie-menu"> <img src="img/configurator/tie.png" class="img-responsive"> <span>Tie</span></a> </li>
+                    <li> <a href="javascript:void(0)" class="sidebar-toggle shoes-menu" data-id="shoes-menu"> <img src="img/configurator/shoes.png" class="img-responsive"> <span>Shoes</span></a> </li>
+                   
+
+                </ul>
+            </div>
+
+             <!-- pane for Styling-->
+            <div class="sidebar-list" id="styling-menu">
+                <div class="sidebar_inside content fabrics">
+
+                    <h2 class="heading_main ">Jacket Selection</h2>
+                    <div id="jacketStyleList" style="margin-bottom: 40px">
+                        <div class="clearfix">
+
+                             <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric active" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='singleButton' src='img/style/jacket/single_button.png'></a><span>Single Button</span></div></div>
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='twoButton' src='img/style/jacket/two_button.png'></a><span>2 Button</span></div></div>
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='threeButton' src='img/style/jacket/three_button.png'></a><span>3 Button</span></div></div>
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='fourButtonDoubleBreasted' src='img/style/jacket/four_button.png'></a><span>4 Button Double Breasted</span></div></div>
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='sixButtonDoubleBreasted' src='img/style/jacket/six_button.png'></a><span>6 Button Double Breasted</span></div></div>
+
+
+                        </div>
+                    </div>
+
+                    <h2 class="heading_main ">Lapel Selection</h2>
+                    <div id="lapelStyleList" style="margin-bottom: 40px">
+                        <div class="clearfix">
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric active" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='notch' src='img/style/lapel/notch.png'></a><span>Notch</span></div></div>
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='peak' src='img/style/lapel/peak.png'></a><span>Peak</span></div></div>
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='shawl' src='img/style/lapel/shawl.png'></a><span>Shawl</span></div></div>
+
+                        </div>
+                    </div>
+
+
+                    <h2 class="heading_main ">Pocket Selection</h2>
+                    <div id="pocketStyleList" style="margin-bottom: 40px">
+                        <div class="clearfix">
+
+                              <!-- <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='straightPocket' src='img/style/pocket/straight_pocket.png'></a><span>Straight Pocket</span></div></div> -->
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric active" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='straightPocketWithTicket' src='img/style/pocket/straight_pocket_with_ticket.png'></a><span>Straight Pocket With Ticket</span></div></div>
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='standardPocket' src='img/style/pocket/standard_pocket.png'></a><span>Standard Pocket</span></div></div>
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='standardPocketWithTicket' src='img/style/pocket/standard_pocket_with_ticket.png'></a><span>Standard Pocket With Ticket</span></div></div>
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='patchPocket' src='img/style/pocket/patch_pocket.png'></a><span>Patch Pocket</span></div></div>
+
+                        </div>
+                    </div>
+
+
+
+                    <h2 class="heading_main ">Vent Selection</h2>
+                    <div id="ventStyleList" style="margin-bottom: 40px">
+                        <div class="clearfix">
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric active" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='singleVent' src='img/style/vent/single_vent.png'></a><span>Single Vent</span></div></div>
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='doubleVent' src='img/style/vent/double_vent.png'></a><span>Double Vent</span></div></div>
+
+                              <div class="col-md-4 col-sm-4 col-xs-6"><div class="border_image dark_bg"><a class="load_fabric" href="javascript:void(0);"><i class="ion-ios-checkmark"></i>
+                              <div class="hover-btns"></div><img class="center-block big"  data-value='noVent' src='img/style/vent/no_vent.png'></a><span>No Vent</span></div></div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- pane for Jacket-->
+            <div class="sidebar-list" id="jacket-menu" style="display:none;">
+                <div class="sidebar_inside">
+                    <h2 class="heading_main margin-bottom-off">Jacket Fabric<span><button type="button" id="jacketFilter" data-toggle="modal" data-target="#jacketModal" class="btn ion ion-android-funnel">&nbsp;Filter</button> </span></h2>
+                    <div id="jacket_list" class="content fabrics">
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--pane for trousers -->
+            <div class="sidebar-list" id="trouser-menu" style="display:none;">
+                <div class="sidebar_inside">
+                    <h2 class="heading_main margin-bottom-off">Trousers Fabric<span><button type="button" id="trouserFilter" data-toggle="modal" data-target="#trouserModal" class="btn ion ion-android-funnel">&nbsp;Filter</button> </span></h2>
+                    <div id="trouser_list" class="content fabrics">
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--pane for shirt -->
+            <div class="sidebar-list" id="favourite-menu" style="display:none;">
+                <div class="sidebar_inside">
+                    <h2 class="heading_main margin-bottom-off">Shirt Fabric<span><button type="button" id="shirtFilter" data-toggle="modal" data-target="#shirtModal" class="btn ion ion-android-funnel">&nbsp;Filter</button> </span></h2>
+                    <div id="favourite_list" class="content fabrics">
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+              <!--pane for tie -->
+            <div class="sidebar-list" id="tie-menu" style="display:none;">
+                <div class="sidebar_inside">
+                    <h2 class="heading_main margin-bottom-off">Tie Fabric</h2>
+                    <div id="tie_list" class="content fabrics">
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+           <!--pane for shoes -->
+            <div class="sidebar-list" id="shoes-menu" style="display:none;">
+                <div class="sidebar_inside">
+                    <h2 class="heading_main margin-bottom-off">Shoes Fabric</h2>
+                    <div id="shoes_list" class="content fabrics">
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!--pane for shoes -->
+            <div class="sidebar-list" id="jacket-menu" style="display:none;">
+                <div class="sidebar_inside">
+                    <h2 class="heading_main margin-bottom-off">Jacket Fabric<span><button type="button" id="jacketFilter" data-toggle="modal" data-target="#jacketModal" class="btn ion ion-android-funnel">&nbsp;Filter</button> </span></h2>
+                    <div id="jacket_list" class="content fabrics">
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+    </div>
+
+    <!-- style tab -->
+    <div class="sidebar tab-pane" id="style_tab">
+
+      <div class="sidebar_outer">
+        
+          <div id="sizing_info" class="content sizing scrollable">
+              <div class="clearfix">
+
+                  <!-- Exit (Are you sure?) Modal -->
+                  <div class="modal fade" id="exitApplication" tabindex="-1" role="dialog" aria-labelledby="exitApplication">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          Data Saved
+                        </div>
+                      </div>
+                    </div>
+                  </div><!-- /Exit (Are you sure?) Modal -->
+
+                  <form id="sizingForm" class='sizingForm'>
+                          <div class="row">
+
+                            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Height</label>
+                                <input type="number" class="form-control" step="0.01" name="Height" placeholder="Height">
+                              </div>
+                            </div>
+
+                            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label class="select" >Fit Type</label>
+                                <select name="Fit Type" class="form-control">
+                                    <option value="Slim">Slim</option>
+                                    <option value="Regular">Regular</option> 
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Neck</label>
+                                <input type="number" class="form-control" step="0.01" name="Neck" placeholder="Neck">
+                              </div>
+                            </div>
+
+
+                            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Chest</label>
+                                <input type="number" class="form-control" step="0.01" name="Chest" placeholder="Chest">
+                              </div>
+                            </div>
+
+
+                            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Chest</label>
+                                <input type="number" class="form-control" step="0.01" name="Chest" placeholder="Chest">
+                              </div>
+                            </div>
+
+
+                            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Waist</label>
+                                <input type="number" class="form-control" step="0.01" name="Waist" placeholder="Waist">
+                              </div>
+                            </div>
+
+
+                            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Hips</label>
+                                <input type="number" class="form-control" step="0.01" name="Hips" placeholder="Hips">
+                              </div>
+                            </div>
+
+
+                            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Shoulder Span</label>
+                                <input type="number" class="form-control" step="0.01" name="Shoulder Span" placeholder="Shoulder Span">
+                              </div>
+                            </div>
+
+                              <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Left Sleeve</label>
+                                <input type="number" class="form-control" step="0.01" name="Left Sleeve" placeholder="Left Sleeve">
+                              </div>
+                            </div>
+
+
+                            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Right Sleeve</label>
+                                <input type="number" class="form-control" step="0.01" name="Right Sleeve" placeholder="Right Sleeve">
+                              </div>
+                            </div>
+
+                            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Left Wrist</label>
+                                <input type="number" class="form-control" step="0.01" name="Left Wrist" placeholder="Left Wrist">
+                              </div>
+                            </div>
+
+
+                             <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Right Wrist</label>
+                                <input type="number" class="form-control" step="0.01" name="Right Wrist" placeholder="Right Wrist">
+                              </div>
+                            </div>
+
+                             <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Short Sleeve</label>
+                                <input type="number" class="form-control" step="0.01" name="Short Sleeve" placeholder="Short Sleeve">
+                              </div>
+                            </div>
+
+                            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-6">
+                              <div class="form-group">
+                                <label>Bicep</label>
+                                <input type="number" class="form-control" step="0.01" name="Bicep" placeholder="Bicep">
+                              </div>
+                            </div>
+
+                            <div class="col-lg-12 col-xs-12 col-sm-12">
+                              <div class="form-group">
+                                <label >Additional Info</label>
+                                <input type="text" class="form-control" name="Info" placeholder="Additional Info">
+                              </div>
+                            </div>
+
+                          </div><!--/ Row-->
+
+                          <div class="row">
+                            <div class="col-lg-offset-4 col-sm-offset-3 col-lg-4 col-xs-12 col-sm-6">
+                              <div class="form-group">                             
+                                <input type="submit" class="form-control" value="Save" id="submit">
+                              </div>
+                            </div>
+                          </div>
+                              
+
+                          <div type="button" style="display: none" class="btn btn-default btn-sm" data-toggle="modal" data-target="#exitApplication" id="saveButton"></div>
+
+                        </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!--- end style tab -->
+
+
+    <!-- style tab -->
+    <div class="sidebar tab-pane" id="order_tab">
+
+      <div class="sidebar_outer">
+        
+          <div id="order_info" class="content sizing scrollable">
+              <div class="clearfix">
+
+                          <!-- for Image Preview -->
+                          <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-offset-3 col-lg-6">
+                            
+                                <div class="card">
+                                <img id="preview" height="100%" width="100%">
+                              </div>
+
+                            </div>
+                          </div><!--/ Row-->
+
+
+                          <div class="row" style="margin-top: 10px;">
+
+                             <!-- fabric list -->
+                              <div class="col-sm-12 col-md-6 col-lg-6">
+                              
+                                <div class="card">
+                                    
+                                  <ul class="list-group" style="max-height: 300px; overflow-y: scroll;">
+
+                                  </ul>
+
+                                </div>
+
+                              </div> <!--end list -->
+
+
+                              <!-- measurement list -->
+                              <div class="col-sm-12 col-md-6 col-lg-6">
+                              
+                                <div class="card" id="measurements" >
+
+                                    <div class="row header">
+                                      <div class="col-sm-4 col-xs-4">
+                                        <p>Metric</p>
+                                      </div>
+                                      <div class="col-sm-8 col-xs-8">
+                                        <p>Value</p>
+                                      </div>
+                                    </div>
+
+                                    <div id="measurementValues" style="max-height: 300px; overflow-y: scroll;"></div>
+                              
+                                 </div>
+
+                              </div><!--end list -->
+                            </div><!--/ Row-->
+
+                              <div class="row">
+                                <div class="col-lg-offset-4 col-sm-offset-3 col-lg-4 col-xs-12 col-sm-6" style="margin-top: 15px;">
+                                  <div class="form-group">                             
+                                    <input type="submit" class="form-control" value="Enter Details" data-toggle="modal" data-target="#pdfModal">
+                                  </div>
+                                </div>
+                              </div>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!--- end style tab -->
+
+
+
+</div> <!-- end tab content -->
+
+<!-- Bootstrap core JavaScript
+    ================================================== --> 
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="js/bootstrap.min.js"></script>
+
+<!-- <script src="js/main.js"></script>
+
+<script src="js/function.js"></script>
+<script src="js/styleselection.js"></script>
+<script src="js/jacket.js"></script>
+<script src="js/trouser.js"></script>
+<script src="js/shirt.js"></script>
+<script src="js/sizing.js"></script>
+<script src="js/tie.js"></script>
+<script src="js/shoes.js"></script>
+<script src="js/order.js"></script> -->
+
+
+
+ 
+
+<script src="js-nonobf/main.js"></script>
+<script src="js-nonobf/function.js"></script>
+
+<script src="js-nonobf/styleselection.js"></script>
+<script src="js-nonobf/jacket.js"></script>
+<script src="js-nonobf/trouser.js"></script>
+<script src="js-nonobf/shirt.js"></script>
+<script src="js-nonobf/sizing.js"></script>
+<script src="js-nonobf/tie.js"></script>
+<script src="js-nonobf/shoes.js"></script>
+<script src="js-nonobf/order.js"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.0.16/jspdf.plugin.autotable.js"></script>
+
+
+</body>
+</html>

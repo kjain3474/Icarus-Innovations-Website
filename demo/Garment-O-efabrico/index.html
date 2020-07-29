@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="images/valji.png">
+	<title>Garment Viewer</title>
+	<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+	<script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="viewer.js"></script>
+	<link rel="stylesheet" href="viewer.css">
+	<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+</head>
+
+<body>	
+
+<!--loader -->
+<div class="preloader-wrapper" id="loader">
+	<div class="preloader-content">
+		<div class="img-wrapper">
+			<img src="outer.png" class="outer upscaled-to-large">
+		</div>
+	</div>
+</div>
+
+<div style=" font-family: Quicksand, sans-serif;">
+Click any texture to see 3D garment
+</div>
+<div id="scrollWrapper" class="scrolling-wrapper">
+<div class="card-img"><img id="c4" src="A1.jpg" onclick="openView(this.src)"></img></div>
+<div class="card-img"><img id="c4" src="4.jpg" onclick="openView(this.src)"></img></div>
+</div>
+
+<div class="wrapper" id="wrapper">
+
+  
+  <div class="profile-card js-profile-card">
+   
+
+    <div class="profile-card__cnt js-profile-cnt">
+
+
+      <div class="profile-card-inf">
+	  
+	  
+		<a-scene embedded loading-screen="enabled: false" renderer="antialias: true;
+                   colorManagement: true;
+                   sortObjects: true;
+                   physicallyCorrectLights: true;
+                   maxCanvasWidth: 1920;
+                   maxCanvasHeight: 1920;
+				   logarithmicDepthBuffer: true" gltf-model="dracoDecoderPath: gltf/;">
+			  <a-assets>
+				<img id="sky" crossorigin="anonymous" src="sky.jpg">
+				<a-asset-item id="fullshirt" src="models/shirt.glb"></a-asset-item>
+				<a-asset-item id="halfshirt" src="models/halfshirt.glb"></a-asset-item>
+				<a-asset-item id="trouser" src="models/trousers.glb"></a-asset-item>
+			  </a-assets>
+
+			<a-entity
+				orbit-controls="target: 0 0 0; 
+				  enableDamping: true;
+				  enablePan: false;
+				  dampingFactor: 0.125;
+				  rotateSpeed: 0.25;
+				  minDistance: 1.5;
+				  maxDistance: 3; 
+				  initialPosition: 0 3 10"
+				id="camera"
+				camera="
+				active: true;
+				fov: 90;
+				zoom: 1.7;
+				"				
+			  >
+			</a-entity>
+		
+
+			<a-entity id="target">
+				  <a-entity light="type:hemisphere;groundColor:#000000;color:#ffffff;angle:0;distance:10;decay:0;intensity:1;target:#cloth;" position="0 10 0" rotation="0 0 0" ></a-entity>
+     
+                 <a-light type="ambient" intensity="1"></a-light> 
+                 
+                 <a-entity
+                    light="type: directional;
+					castShadow: true;
+                    intensity: 1.5;"
+                    position="1 2 2.5">
+                </a-entity>
+                 
+                 <a-entity
+                    light="type: directional;
+					castShadow: true;
+                    intensity: 1.5;"
+                    position="1 2 -2.5">
+                </a-entity>
+				 
+				 <a-entity
+						id="cloth"
+						loaded-event
+						position="0 -2 0"
+						rotation="0 0 0"
+				  ></a-entity>
+				  
+
+				 
+			</a-entity>
+
+
+		</a-scene>
+
+      </div>
+
+      <div class="profile-card-social">
+        <a id="fullshirt" onclick="changeModel(this.id)" class="profile-card-social__item facebook" target="_blank">
+          <span class="icon-font">
+              <img crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/icarusinnovations/icarusinnovations.github.io/3dgv/images/fullshirt.svg">
+          </span>
+        </a>
+
+        <a id="halfshirt" onclick="changeModel(this.id)" class="profile-card-social__item twitter" target="_blank">
+          <span class="icon-font">
+              <img crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/icarusinnovations/icarusinnovations.github.io/3dgv/images/halfshirt.svg">
+          </span>
+        </a>
+
+        <a id="trouser" onclick="changeModel(this.id)" class="profile-card-social__item instagram" target="_blank">
+          <span class="icon-font">
+             <img crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/icarusinnovations/icarusinnovations.github.io/3dgv/images/trousers.svg">
+          </span>
+        </a>
+
+      </div>
+
+      <div class="profile-card-ctr">
+        <button class="profile-card__button button--orange" onclick="closeView()">Back</button>
+      </div>
+	  
+	  <div class="profile-card-ctr-copyright">
+        <p>Powered by <a href="https://www.icarusinnovations.co" target="_blank"><span><img crossorigin="anonymous" src="images/logo.png"></img></span></a></p>
+      </div>
+    </div>
+
+</div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

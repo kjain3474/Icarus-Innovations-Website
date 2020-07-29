@@ -1,0 +1,19 @@
+//Player creation
+				if(true)
+				{
+				console.log(data);
+			
+				$.ajax({
+				url: 'https://api.avatarsdk.com/players/',
+				type: 'POST',
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader('Authorization',  [data['token_type'], data['access_token']].join(' '));
+				},
+				data: {'comment': 'test_py'},
+				success: function (data, status, xhr) {
+					console.log("Player " + data['code']);
+				},
+				error: function () { },
+				});
+
+				}
